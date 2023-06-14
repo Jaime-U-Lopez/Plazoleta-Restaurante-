@@ -14,4 +14,6 @@ public class PersonResponseDto {
     private String idDniType;
     private String dniNumber;
     private String idPersonType;
+
+    private String birthDate;
 }
