@@ -7,7 +7,7 @@ public class Person {
     private Long id;
     private String name;
     private String surname;
-    private String mail;
+    private String email;
     private String phone;
     private String address;
     private String idDniType;
@@ -17,11 +17,11 @@ public class Person {
 
     private LocalDate birthDate;
 
-    public Person(Long id, String name, String surname, String mail, String phone, String address, String idDniType, String dniNumber, String idPersonType, String password,LocalDate birthDate) {
+    public Person(Long id, String name, String surname, String email, String phone, String address, String idDniType, String dniNumber, String idPersonType, String password,LocalDate birthDate) {
         this.id = id;
         this.name = name;
         this.surname = surname;
-        this.mail = mail;
+        this.email = email;
         this.phone = phone;
         this.address = address;
         this.idDniType = idDniType;
@@ -29,6 +29,14 @@ public class Person {
         this.idPersonType = idPersonType;
         this.password = password;
         this.birthDate = birthDate;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public LocalDate getBirthDate() {
@@ -61,14 +69,6 @@ public class Person {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
     }
 
     public String getPhone() {

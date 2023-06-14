@@ -8,16 +8,24 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class LoginRequestDto {
-    @NotBlank
-    private String userDni;
-    @NotBlank
+
+    private String userEmail;
     private String password;
 
-    public String getUserDni() {
-        return userDni;
+
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUserDni(String userDni) {
-        this.userDni = userDni;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

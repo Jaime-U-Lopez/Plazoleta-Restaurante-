@@ -19,7 +19,7 @@ public class PersonMysqlAdapter implements IPersonPersistencePort {
         if (personRepository.findByDniNumber(person.getDniNumber()).isPresent()) {
             throw new PersonAlreadyExistsException();
         }
-        if (personRepository.existsByMail(person.getMail())){
+        if (personRepository.existsByEmail(person.getEmail())){
             throw new MailAlreadyExistsException();
         }
 

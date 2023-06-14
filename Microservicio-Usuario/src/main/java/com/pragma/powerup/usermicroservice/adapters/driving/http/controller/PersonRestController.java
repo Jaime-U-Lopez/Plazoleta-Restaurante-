@@ -38,7 +38,7 @@ public class PersonRestController {
                 @ApiResponse(responseCode = "409", description = "Person already exists",
                         content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
     @PostMapping
-    public ResponseEntity<Map<String, String>> savePerson(@Valid @RequestBody PersonRequestDto personRequestDto) {
+    public ResponseEntity<Map<String, String>> savePerson( @RequestBody PersonRequestDto personRequestDto) {
         LocalDate fechaNacimiento = personRequestDto.getBirthDate();
 
         LocalDate fechaActual = LocalDate.now();
@@ -48,10 +48,9 @@ public class PersonRestController {
             throw new ExceptionErrorBirtYear(Constants.ERROR_DATE_BIRTH);
         }
 
-
-
         personHandler.savePerson(personRequestDto);
+
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.PERSON_CREATED_MESSAGE));
+                .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.PERSON_CREATED_MESSAGE ));
     }
 }

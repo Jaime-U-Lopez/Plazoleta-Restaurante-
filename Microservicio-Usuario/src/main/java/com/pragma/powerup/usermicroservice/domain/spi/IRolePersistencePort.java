@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IRolePersistencePort {
     List<Role> getAllRoles();
+
+    void createRol(Role role );
 }

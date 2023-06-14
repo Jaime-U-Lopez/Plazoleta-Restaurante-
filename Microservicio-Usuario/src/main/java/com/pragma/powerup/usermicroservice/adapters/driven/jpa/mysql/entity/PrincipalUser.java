@@ -15,11 +15,11 @@ public class PrincipalUser implements UserDetails {
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public PrincipalUser(String nombre, String nombreUsuario, String email, String password,
+    public PrincipalUser(String nombre, String nombreUsuario, String mail, String password,
                          Collection<? extends GrantedAuthority> authorities) {
         this.nombre = nombre;
         this.nombreUsuario = nombreUsuario;
-        this.email = email;
+        this.email = mail;
         this.password = password;
         this.authorities = authorities;
     }
@@ -27,7 +27,7 @@ public class PrincipalUser implements UserDetails {
     public static PrincipalUser build(PersonEntity usuario, List<RoleEntity> roles) {
         List<GrantedAuthority> authorities = roles.stream()
                 .map(rol -> new SimpleGrantedAuthority(rol.getName())).collect(Collectors.toList());
-        return new PrincipalUser(usuario.getName(), usuario.getDniNumber(), usuario.getMail(),
+        return new PrincipalUser(usuario.getName(), usuario.getDniNumber(), usuario.getEmail(),
                 usuario.getPassword(), authorities);
     }
 
@@ -43,7 +43,7 @@ public class PrincipalUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return nombreUsuario;
+        return email;
     }
 
     @Override
