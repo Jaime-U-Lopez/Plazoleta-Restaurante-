@@ -24,7 +24,7 @@ public class PersonRequestDto {
     private String surname;
     @NotBlank
     @Pattern( message = "El correo debe tener el formato correcto.", regexp = "[A-Za-z0-9+_.-]+@(.+\\.[A-Za-z]+)$")
-    private String mail;
+    private String email;
     @NotBlank
     @Pattern(regexp = "^(\\+\\d{1,3})?((\\d{1,3})|\\d{1,3})\\d{3,4}\\d{4}$", message = "el numero de celular debe tener el formato correcto.")
     @Size(min = 6, max = 13, message = "El numero de celular debe tener entre 6 y 13 digitos.")

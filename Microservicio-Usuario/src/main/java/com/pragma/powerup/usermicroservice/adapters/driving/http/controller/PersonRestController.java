@@ -1,6 +1,7 @@
 package com.pragma.powerup.usermicroservice.adapters.driving.http.controller;
 
 
+import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.adapter.PersonMysqlAdapter;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.request.PersonRequestDto;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.exceptions.ExceptionErrorBirtYear;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.handlers.IPersonHandler;
@@ -31,6 +32,7 @@ import java.util.Map;
 public class PersonRestController {
     private final IPersonHandler personHandler;
 
+    private PersonMysqlAdapter personMysqlAdapter;
     @Operation(summary = "Add a new person",
             responses = {
                 @ApiResponse(responseCode = "201", description = "Person created",
@@ -48,9 +50,10 @@ public class PersonRestController {
             throw new ExceptionErrorBirtYear(Constants.ERROR_DATE_BIRTH);
         }
 
+
         personHandler.savePerson(personRequestDto);
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.PERSON_CREATED_MESSAGE ));
+                .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.PERSON_CREATED_MESSAGE  ));
     }
 }

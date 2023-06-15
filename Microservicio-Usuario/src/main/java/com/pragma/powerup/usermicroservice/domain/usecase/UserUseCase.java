@@ -42,4 +42,9 @@ public class UserUseCase implements IUserServicePort {
     public User getClient(Long id) {
         return userPersistencePort.getClient(id);
     }
+
+    @Override
+    public User getOwner(Long id) {
+        return userPersistencePort.getOwner(id);
+    }
 }

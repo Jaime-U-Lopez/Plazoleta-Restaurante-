@@ -1,5 +1,7 @@
 package com.pragma.powerup.usermicroservice.configuration;
 
+import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.adapter.PersonMysqlAdapter;
+
 public class Constants {
 
     private Constants() {
@@ -9,10 +11,11 @@ public class Constants {
     public static final Long CLIENT_ROLE_ID = 1L;
     public static final Long EMPLOYEE_ROLE_ID = 2L;
     public static final Long PROVIDER_ROLE_ID = 3L;
+    public static final Long OWNER_ROLE_ID = 4L;
     public static final int MAX_PAGE_SIZE = 2;
     public static final String RESPONSE_MESSAGE_KEY = "message";
     public static final String PERSON_CREATED_MESSAGE = "Person created successfully";
-    public static final String USER_CREATED_MESSAGE = "User created successfully";
+    public static final String USER_CREATED_MESSAGE = "User created successfully" ;
 
     public static final String ERROR_DATE_BIRTH = "El usuario debe ser mayor de edad";
     public static final String USER_DELETED_MESSAGE = "User deleted successfully";

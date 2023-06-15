@@ -6,6 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class PersonResponseDto {
+
+
     private String name;
     private String surname;
     private String email;
