@@ -11,6 +11,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Entity
 @Table(name = "person")
 @NoArgsConstructor
@@ -23,7 +26,7 @@ public class PersonEntity {
     private Long id;
     private String name;
     private String surname;
-    private String mail;
+    private String email;
     private String phone;
     private String address;
     private String idDniType;
@@ -32,4 +35,8 @@ public class PersonEntity {
     private String idPersonType;
     private String password;
     private String tokenPassword;
+
+    private LocalDate birthDate;
+
+
 }

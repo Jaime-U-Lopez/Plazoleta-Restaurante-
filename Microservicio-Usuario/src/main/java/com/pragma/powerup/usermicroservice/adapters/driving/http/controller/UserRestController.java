@@ -100,4 +100,26 @@ public class UserRestController {
     public ResponseEntity<PersonResponseDto> getClient(@PathVariable Long id) {
         return ResponseEntity.ok(userHandler.getClient(id));
     }
+
+
+    @Operation(summary = "Get a owner  user",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Owner user returned",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonResponseDto.class))),
+                    @ApiResponse(responseCode = "404", description = "User not found with client role",
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+    @GetMapping("/owner/{id}")
+    public ResponseEntity<PersonResponseDto> getOwner(@PathVariable Long id) {
+        return ResponseEntity.ok(userHandler.getOwner(id));
+    }
+
+    @GetMapping("/endpoint")
+    public String getResponseFromMicroservicio2() {
+        // Lógica del endpoint del Microservicio 2
+        return "Respuesta desde el Microservicio 2";
+    }
+
+
+
+
 }

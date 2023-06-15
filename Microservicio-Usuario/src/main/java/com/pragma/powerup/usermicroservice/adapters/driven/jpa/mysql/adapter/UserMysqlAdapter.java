@@ -20,10 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static com.pragma.powerup.usermicroservice.configuration.Constants.CLIENT_ROLE_ID;
-import static com.pragma.powerup.usermicroservice.configuration.Constants.EMPLOYEE_ROLE_ID;
-import static com.pragma.powerup.usermicroservice.configuration.Constants.MAX_PAGE_SIZE;
-import static com.pragma.powerup.usermicroservice.configuration.Constants.PROVIDER_ROLE_ID;
+import static com.pragma.powerup.usermicroservice.configuration.Constants.*;
 
 @RequiredArgsConstructor
 @Transactional
@@ -81,6 +78,13 @@ public class UserMysqlAdapter implements IUserPersistencePort {
     @Override
     public User getClient(Long id) {
         UserEntity userEntity = userRepository.findByPersonEntityIdAndRoleEntityId(id, CLIENT_ROLE_ID).orElseThrow(UserNotFoundException::new);
+        return userEntityMapper.toUser(userEntity);
+    }
+
+    @Override
+    public User getOwner(Long id) {
+
+        UserEntity userEntity = userRepository.findByPersonEntityIdAndRoleEntityId(id, OWNER_ROLE_ID).orElseThrow(UserNotFoundException::new);
         return userEntityMapper.toUser(userEntity);
     }
 }

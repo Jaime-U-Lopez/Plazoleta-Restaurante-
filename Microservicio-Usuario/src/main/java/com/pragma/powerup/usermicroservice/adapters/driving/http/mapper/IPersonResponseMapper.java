@@ -14,7 +14,7 @@ import java.util.List;
 public interface IPersonResponseMapper {
     @Mapping(source = "person.name", target = "name")
     @Mapping(source = "person.surname", target = "surname")
-    @Mapping(source = "person.mail", target = "mail")
+    @Mapping(source = "person.email", target = "email")
     @Mapping(source = "person.phone", target = "phone")
     @Mapping(source = "person.address", target = "address")
     @Mapping(source = "person.idDniType", target = "idDniType")

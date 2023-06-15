@@ -18,4 +18,11 @@ public class RoleUseCase implements IRoleServicePort {
     public List<Role> getAllRoles() {
         return rolePersistencePort.getAllRoles();
     }
+
+    @Override
+    public void createRoles( Role role) {
+                this.rolePersistencePort.createRol(role);
+    }
+
+
 }
