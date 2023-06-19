@@ -1,5 +1,6 @@
 package com.pragma.powerup.usermicroservice.adapters.driving.http.mapper;
 
+import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.entity.RoleEntity;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.request.RolRequestDto;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.response.RoleResponseDto;
 import com.pragma.powerup.usermicroservice.domain.model.Role;
@@ -13,4 +14,5 @@ import java.util.List;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IRoleRequestMapper {
     Role toRole(RolRequestDto rolRequestDto);
+    Role roleEntitytoRole(RoleEntity roleEntity);
 }

@@ -1,7 +1,9 @@
 package com.pragma.powerup.usermicroservice.adapters.driving.http.handlers;
 
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.request.PersonRequestDto;
+import com.pragma.powerup.usermicroservice.domain.model.User;
 
 public interface IPersonHandler {
-    void savePerson(PersonRequestDto personRequestDto);
+    User savePerson(PersonRequestDto personRequestDto);
+
 }

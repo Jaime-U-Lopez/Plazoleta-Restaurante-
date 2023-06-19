@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -23,8 +24,11 @@ public class MainSecurity {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
+
+
     @Autowired
     JwtEntryPoint jwtEntryPoint;
+
 
     @Bean
     public JwtTokenFilter jwtTokenFilter() {
@@ -36,18 +40,48 @@ public class MainSecurity {
         return new BCryptPasswordEncoder();
     }
 
+
+
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
 
+
+
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests(requests -> requests
-                        .requestMatchers("/auth/login","/user", "/role", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/actuator/health", "/person/").permitAll()
-                        .requestMatchers("/use").hasRole("ADMIN")
+                        .requestMatchers("/auth/login","/user/client",  "/user/**", "/role/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/actuator/health", "/use/").permitAll()
+                        .requestMatchers( "/rol/**").hasRole("ADMIN")
+                        .requestMatchers( "/user/employee").hasRole("OWNER")
+                        .anyRequest().authenticated()
+                )
+                .formLogin().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
+         .and();
+       http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        return http.build();
+    }
+
+
+
+
+
+
+    /*
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.cors().and().csrf().disable()
+                .authorizeRequests(requests -> requests
+                        .requestMatchers("/auth/login","/user/**", "/rol", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/actuator/health", "/person/").permitAll()
+                        .requestMatchers( "/role/**").hasRole("ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 .formLogin().disable()
@@ -57,4 +91,7 @@ public class MainSecurity {
         http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
+
+ */
 }

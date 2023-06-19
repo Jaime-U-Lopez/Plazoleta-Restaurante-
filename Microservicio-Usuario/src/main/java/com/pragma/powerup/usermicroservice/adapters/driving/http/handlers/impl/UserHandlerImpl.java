@@ -1,11 +1,18 @@
 package com.pragma.powerup.usermicroservice.adapters.driving.http.handlers.impl;
 
+import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.repositories.IRoleRepository;
+import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.request.ClientRequestDto;
+import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.request.EmployeeRequestDto;
+import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.request.OwnerRequestDto;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.request.UserRequestDto;
-import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.response.PersonResponseDto;
+import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.response.UserResponseDto;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.handlers.IUserHandler;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.mapper.IPersonResponseMapper;
+import com.pragma.powerup.usermicroservice.adapters.driving.http.mapper.IRoleRequestMapper;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.mapper.IUserRequestMapper;
 import com.pragma.powerup.usermicroservice.domain.api.IUserServicePort;
+import com.pragma.powerup.usermicroservice.domain.model.Role;
+import com.pragma.powerup.usermicroservice.domain.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +22,35 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserHandlerImpl implements IUserHandler {
 
+
+    private final IRoleRepository roleRepository;
     private final IUserServicePort userServicePort;
     private final IUserRequestMapper userRequestMapper;
     private final IPersonResponseMapper personResponseMapper;
+private final IRoleRequestMapper roleRequestMapper;
 
     @Override
     public void saveUser(UserRequestDto userRequestDto) {
+
         userServicePort.saveUser(userRequestMapper.toUser(userRequestDto));
+    }
+
+    @Override
+    public void saveOwner(OwnerRequestDto ownerRequestDto) {
+        User user =userRequestMapper.ownerRequestDtotoUser(ownerRequestDto);
+        Role role= roleRequestMapper.roleEntitytoRole(roleRepository.findById(4l).get());
+        user.setRole(role);
+        userServicePort.saveUser(user);
+    }
+
+    @Override
+    public void saveClient(ClientRequestDto clientRequestDto) {
+        userServicePort.saveUser(userRequestMapper.clientRequestDtotoUser(clientRequestDto));
+    }
+
+    @Override
+    public void saveEmployee(EmployeeRequestDto employeeRequestDto) {
+        userServicePort.saveUser(userRequestMapper.employeeRequestDtotoUser(employeeRequestDto));
     }
 
     @Override
@@ -30,27 +59,27 @@ public class UserHandlerImpl implements IUserHandler {
     }
 
     @Override
-    public List<PersonResponseDto> getProvider(Integer page) {
+    public List<UserResponseDto> getProvider(Integer page) {
         return personResponseMapper.userListToPersonResponseList(userServicePort.getAllProviders(page));
     }
 
     @Override
-    public PersonResponseDto getProvider(Long id) {
-        return personResponseMapper.userToPersonResponse(userServicePort.getProvider(id));
+    public UserResponseDto getProvider(Long id) {
+        return personResponseMapper.userToUserResponse(userServicePort.getProvider(id));
     }
 
     @Override
-    public PersonResponseDto getEmployee(Long id) {
-        return personResponseMapper.userToPersonResponse(userServicePort.getEmployee(id));
+    public UserResponseDto getEmployee(Long id) {
+        return personResponseMapper.userToUserResponse(userServicePort.getEmployee(id));
     }
 
     @Override
-    public PersonResponseDto getClient(Long id) {
-        return personResponseMapper.userToPersonResponse(userServicePort.getClient(id));
+    public UserResponseDto getClient(Long id) {
+        return personResponseMapper.userToUserResponse(userServicePort.getClient(id));
     }
 
     @Override
-    public PersonResponseDto getOwner(Long id) {
-        return personResponseMapper.userToPersonResponse(userServicePort.getOwner(id));
+    public UserResponseDto getOwner(Long id) {
+        return personResponseMapper.userToUserResponse(userServicePort.getOwner(id));
     }
 }
