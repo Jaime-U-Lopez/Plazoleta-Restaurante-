@@ -81,12 +81,22 @@ public class UserMysqlAdapter implements IUserPersistencePort {
     @Override
     public User getEmployee(Long id) {
         UserEntity userEntity = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+
+        if(userEntity.getRoleEntity().getId()==2){
+
+            throw new UserNotFoundException(" The id not is Employee");
+        }
         return userEntityMapper.toUser(userEntity);
     }
 
     @Override
     public User getClient(Long id) {
         UserEntity userEntity = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+
+        if(userEntity.getRoleEntity().getId()==1){
+
+            throw new UserNotFoundException(" The id not is Client");
+        }
         return userEntityMapper.toUser(userEntity);
     }
 
@@ -94,6 +104,11 @@ public class UserMysqlAdapter implements IUserPersistencePort {
     public User getOwner(Long id) {
 
         UserEntity userEntity = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+
+        if(userEntity.getRoleEntity().getId()==4){
+
+           throw new UserNotFoundException(" The id not is Owner");
+        }
         return userEntityMapper.toUser(userEntity);
     }
 }
