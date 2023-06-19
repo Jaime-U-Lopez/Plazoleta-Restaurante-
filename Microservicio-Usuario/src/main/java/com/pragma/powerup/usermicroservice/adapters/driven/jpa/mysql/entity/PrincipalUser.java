@@ -18,7 +18,7 @@ public class PrincipalUser implements UserDetails {
     public PrincipalUser(String nombre, String nombreUsuario, String mail, String password,
                          Collection<? extends GrantedAuthority> authorities) {
         this.nombre = nombre;
-        this.nombreUsuario = nombreUsuario;
+        this.nombreUsuario = mail;
         this.email = mail;
         this.password = password;
         this.authorities = authorities;

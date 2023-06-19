@@ -1,8 +1,8 @@
 package com.pragma.powerup.usermicroservice.configuration.security.jwt;
 
-import com.nimbusds.jwt.JWT;
-import com.nimbusds.jwt.JWTClaimsSet;
-import com.nimbusds.jwt.JWTParser;
+//import com.nimbusds.jwt.JWT;
+//import com.nimbusds.jwt.JWTClaimsSet;
+//import com.nimbusds.jwt.JWTParser;
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.entity.PrincipalUser;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.response.JwtResponseDto;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.response.JwtResponseTokenDto;
@@ -68,18 +68,18 @@ public class JwtProvider {
         return false;
     }
 
-<<<<<<< HEAD
+
     /*
 
      */
-    public String refreshToken(JwtResponseDto jwtResponseDto) throws ParseException {
-=======
+
+
     public String refreshToken(JwtResponseTokenDto jwtResponseTokenDto) throws ParseException {
->>>>>>> user2
+
         try {
             Jwts.parser().setSigningKey(secret).parseClaimsJws(jwtResponseTokenDto.getToken());
         } catch (ExpiredJwtException e) {
-<<<<<<< HEAD
+
             /*
 
 
@@ -99,17 +99,16 @@ public class JwtProvider {
                     .signWith(SignatureAlgorithm.HS256, secret)
                     .compact();
 
+          return token;
 
-<<<<<<< HEAD
              */
-=======
-            return token;
 
->>>>>>> user2
+
         }
-        return null;
+return null;
     }
 }
+
 
 
 
