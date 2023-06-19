@@ -2,6 +2,7 @@ package com.pragma.powerup.usermicroservice.adapters.driving.http.controller;
 
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.request.LoginRequestDto;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.response.JwtResponseDto;
+import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.response.JwtResponseTokenDto;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.handlers.IAuthHandler;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -28,7 +29,6 @@ public class AuthController {
 
     private final IAuthHandler authHandler;
 
-
     @Autowired
     AuthenticationManager authenticationManager;
 
@@ -40,7 +40,7 @@ public class AuthController {
 
     @PostMapping("/refresh")
     @SecurityRequirement(name = "jwt")
-    public ResponseEntity<JwtResponseDto> refresh(@RequestBody JwtResponseDto jwtResponseDto) throws ParseException {
-        return new ResponseEntity<>(authHandler.refresh(jwtResponseDto), HttpStatus.OK);
+    public ResponseEntity<JwtResponseDto> refresh(@RequestBody JwtResponseTokenDto jwtResponseTokenDto) throws ParseException {
+        return new ResponseEntity<>(authHandler.refresh(jwtResponseTokenDto), HttpStatus.OK);
     }
 }

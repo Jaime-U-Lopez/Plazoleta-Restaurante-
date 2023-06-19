@@ -2,6 +2,7 @@ package com.pragma.powerup.usermicroservice.adapters.driving.http.handlers.impl;
 
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.request.LoginRequestDto;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.response.JwtResponseDto;
+import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.response.JwtResponseTokenDto;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.handlers.IAuthHandler;
 import com.pragma.powerup.usermicroservice.configuration.security.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +34,8 @@ public class AuthHandlerImpl implements IAuthHandler {
     }
 
     @Override
-    public JwtResponseDto refresh(JwtResponseDto jwtResponseDto) throws ParseException {
-        String token = jwtProvider.refreshToken(jwtResponseDto);
+    public JwtResponseDto refresh(JwtResponseTokenDto jwtResponseTokenDto) throws ParseException {
+        String token = jwtProvider.refreshToken(jwtResponseTokenDto);
         return new JwtResponseDto(token);
     }
 }

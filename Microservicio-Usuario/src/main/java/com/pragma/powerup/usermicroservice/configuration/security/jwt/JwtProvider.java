@@ -5,12 +5,8 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.JWTParser;
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.entity.PrincipalUser;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.response.JwtResponseDto;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.UnsupportedJwtException;
-import io.jsonwebtoken.security.SignatureException;
+import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.response.JwtResponseTokenDto;
+import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,33 +21,38 @@ import java.util.stream.Collectors;
 
 @Component
 public class JwtProvider {
-    private final static Logger logger = LoggerFactory.getLogger(JwtProvider.class);
 
+    private final static Logger logger = LoggerFactory.getLogger(JwtProvider.class);
     @Value("${jwt.secret}")
     private String secret;
 
     @Value("${jwt.expiration}")
     private int expiration;
 
+
     public String generateToken(Authentication authentication) {
         PrincipalUser usuarioPrincipal = (PrincipalUser) authentication.getPrincipal();
-        List<String> roles = usuarioPrincipal.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
-        return Jwts.builder()
+
+        String token = Jwts.builder()
                 .setSubject(usuarioPrincipal.getUsername())
-                .claim("roles", roles)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(new Date().getTime() + expiration * 180))
-                .signWith(SignatureAlgorithm.HS256, secret.getBytes())
+                .setExpiration(new Date(new Date().getTime() + expiration * 1000))
+                .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
+
+        return token;
     }
 
     public String getNombreUsuarioFromToken(String token) {
-        return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token)
+                .getBody().getSubject();
     }
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token);
+            Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
             return true;
         } catch (MalformedJwtException e) {
             logger.error("token mal formado");
@@ -67,35 +68,48 @@ public class JwtProvider {
         return false;
     }
 
+<<<<<<< HEAD
     /*
 
      */
     public String refreshToken(JwtResponseDto jwtResponseDto) throws ParseException {
+=======
+    public String refreshToken(JwtResponseTokenDto jwtResponseTokenDto) throws ParseException {
+>>>>>>> user2
         try {
-            Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(jwtResponseDto.getToken());
+            Jwts.parser().setSigningKey(secret).parseClaimsJws(jwtResponseTokenDto.getToken());
         } catch (ExpiredJwtException e) {
+<<<<<<< HEAD
             /*
 
 
 
             JWT jwt = JWTParser.parse(jwtResponseDto.getToken());
+=======
+            JWT jwt = JWTParser.parse(jwtResponseTokenDto.getToken());
+>>>>>>> user2
             JWTClaimsSet claims = jwt.getJWTClaimsSet();
             String nombreUsuario = claims.getSubject();
-            List<String> roles = claims.getStringListClaim("roles");
-            //List<String> roles = (List<String>) claims.getClaim("roles");
 
-            return Jwts.builder()
+
+            String token = Jwts.builder()
                     .setSubject(nombreUsuario)
-                    .claim("roles", roles)
                     .setIssuedAt(new Date())
-                    .setExpiration(new Date(new Date().getTime() + expiration))
-                    .signWith(SignatureAlgorithm.HS256, secret.getBytes())
+                    .setExpiration(new Date(new Date().getTime() + expiration * 1000))
+                    .signWith(SignatureAlgorithm.HS256, secret)
                     .compact();
 
 
+<<<<<<< HEAD
              */
+=======
+            return token;
+
+>>>>>>> user2
         }
         return null;
     }
-
 }
+
+
+

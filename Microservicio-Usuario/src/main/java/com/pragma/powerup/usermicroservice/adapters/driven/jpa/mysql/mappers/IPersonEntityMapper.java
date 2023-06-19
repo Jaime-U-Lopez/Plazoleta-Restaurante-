@@ -1,7 +1,7 @@
 package com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.mappers;
 
-import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.entity.PersonEntity;
-import com.pragma.powerup.usermicroservice.domain.model.Person;
+import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.entity.UserEntity;
+import com.pragma.powerup.usermicroservice.domain.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -9,5 +9,9 @@ import org.mapstruct.ReportingPolicy;
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IPersonEntityMapper {
-    PersonEntity toEntity(Person person);
+    UserEntity toEntity(User user);
+    User toPerson(UserEntity personEntity);
+
+
+
 }
