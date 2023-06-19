@@ -67,10 +67,17 @@ public class JwtProvider {
         return false;
     }
 
+    /*
+
+     */
     public String refreshToken(JwtResponseDto jwtResponseDto) throws ParseException {
         try {
             Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(jwtResponseDto.getToken());
         } catch (ExpiredJwtException e) {
+            /*
+
+
+
             JWT jwt = JWTParser.parse(jwtResponseDto.getToken());
             JWTClaimsSet claims = jwt.getJWTClaimsSet();
             String nombreUsuario = claims.getSubject();
@@ -84,6 +91,9 @@ public class JwtProvider {
                     .setExpiration(new Date(new Date().getTime() + expiration))
                     .signWith(SignatureAlgorithm.HS256, secret.getBytes())
                     .compact();
+
+
+             */
         }
         return null;
     }
