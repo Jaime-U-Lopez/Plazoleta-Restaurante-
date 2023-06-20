@@ -122,9 +122,9 @@ public class UserRestController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDto.class))),
                     @ApiResponse(responseCode = "404", description = "User not found with provider role",
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @GetMapping("/provider/{id}")
-    public ResponseEntity<UserResponseDto> getProvider(@PathVariable Long id) {
-        return ResponseEntity.ok(userHandler.getProvider(id));
+    @GetMapping("/provider/{email}")
+    public ResponseEntity<UserResponseDto> getProvider(@PathVariable String email) {
+        return ResponseEntity.ok(userHandler.getProvider(email));
     }
     @Operation(summary = "Get a employee user",
             responses = {
@@ -132,9 +132,9 @@ public class UserRestController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDto.class))),
                     @ApiResponse(responseCode = "404", description = "User not found with employee role",
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @GetMapping("/employee/{id}")
-    public ResponseEntity<UserResponseDto> getEmployee(@PathVariable Long id) {
-        return ResponseEntity.ok(userHandler.getEmployee(id));
+    @GetMapping("/employee/{email}")
+    public ResponseEntity<UserResponseDto> getEmployee(@PathVariable String email) {
+        return ResponseEntity.ok(userHandler.getEmployee(email));
     }
     @Operation(summary = "Get a client user",
             responses = {
@@ -142,9 +142,9 @@ public class UserRestController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDto.class))),
                     @ApiResponse(responseCode = "404", description = "User not found with client role",
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @GetMapping("/client/{id}")
-    public ResponseEntity<UserResponseDto> getClient(@PathVariable Long id) {
-        return ResponseEntity.ok(userHandler.getClient(id));
+    @GetMapping("/client/{email}")
+    public ResponseEntity<UserResponseDto> getClient(@PathVariable String email) {
+        return ResponseEntity.ok(userHandler.getClient(email));
     }
 
 
@@ -154,9 +154,9 @@ public class UserRestController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDto.class))),
                     @ApiResponse(responseCode = "404", description = "User not found with client role",
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @GetMapping("/owner/{id}")
-    public ResponseEntity<UserResponseDto> getOwner(@PathVariable Long id) {
-        return ResponseEntity.ok(userHandler.getOwner(id));
+    @GetMapping("/owner/{email}")
+    public ResponseEntity<UserResponseDto> getOwner(@PathVariable String email) {
+        return ResponseEntity.ok(userHandler.getOwner(email));
     }
 
 }

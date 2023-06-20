@@ -33,7 +33,7 @@ public class AuthController {
     AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
-    public ResponseEntity<JwtResponseDto> login( @RequestBody LoginRequestDto loginRequestDto) {
+    public ResponseEntity<JwtResponseDto> login(@RequestBody LoginRequestDto loginRequestDto) {
 
         return new ResponseEntity<>(authHandler.login(loginRequestDto), HttpStatus.OK);
     }

@@ -17,6 +17,7 @@ public interface IPersonResponseMapper {
     @Mapping(source = "user.email", target = "email")
     @Mapping(source = "user.phone", target = "phone")
     @Mapping(source = "user.dniNumber", target = "dniNumber")
+    @Mapping(target = "idRole", source = "role.id")
     UserResponseDto userToUserResponse(User user);
     List<UserResponseDto> userListToPersonResponseList(List<User> userList);
 }

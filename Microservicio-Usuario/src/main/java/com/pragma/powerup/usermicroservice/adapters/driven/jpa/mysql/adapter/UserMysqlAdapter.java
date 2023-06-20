@@ -73,16 +73,16 @@ public class UserMysqlAdapter implements IUserPersistencePort {
     }
 
     @Override
-    public User getProvider(Long id) {
-        UserEntity userEntity = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+    public User getProvider(String email) {
+        UserEntity userEntity = userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
         return userEntityMapper.toUser(userEntity);
     }
 
     @Override
-    public User getEmployee(Long id) {
-        UserEntity userEntity = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+    public User getEmployee(String email) {
+        UserEntity userEntity = userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
 
-        if(userEntity.getRoleEntity().getId()==2){
+        if(userEntity.getRoleEntity().getId()!=2l){
 
             throw new UserNotFoundException(" The id not is Employee");
         }
@@ -90,10 +90,10 @@ public class UserMysqlAdapter implements IUserPersistencePort {
     }
 
     @Override
-    public User getClient(Long id) {
-        UserEntity userEntity = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+    public User getClient(String email) {
+        UserEntity userEntity = userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
 
-        if(userEntity.getRoleEntity().getId()==1){
+        if(userEntity.getRoleEntity().getId()!=1l){
 
             throw new UserNotFoundException(" The id not is Client");
         }
@@ -101,11 +101,11 @@ public class UserMysqlAdapter implements IUserPersistencePort {
     }
 
     @Override
-    public User getOwner(Long id) {
+    public User getOwner(String email) {
 
-        UserEntity userEntity = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+        UserEntity userEntity = userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
 
-        if(userEntity.getRoleEntity().getId()==4){
+        if(userEntity.getRoleEntity().getId()!=4l){
 
            throw new UserNotFoundException(" The id not is Owner");
         }

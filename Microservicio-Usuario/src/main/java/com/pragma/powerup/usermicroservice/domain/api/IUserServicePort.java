@@ -10,8 +10,8 @@ public interface IUserServicePort {
 
     void deleteUser(User user);
     List<User> getAllProviders(int page);
-    User getProvider(Long id);
-    User getEmployee(Long id);
-    User getClient(Long id);
-    User getOwner(Long id);
+    User getProvider(String email);
+    User getEmployee(String email);
+    User getClient(String email);
+    User getOwner(String email);
 }

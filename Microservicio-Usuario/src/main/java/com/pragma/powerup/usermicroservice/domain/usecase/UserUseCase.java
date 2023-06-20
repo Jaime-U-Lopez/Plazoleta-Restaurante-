@@ -33,23 +33,23 @@ public class UserUseCase implements IUserServicePort {
     }
 
     @Override
-    public User getProvider(Long id) {
-        return userPersistencePort.getProvider(id);
+    public User getProvider(String email) {
+        return userPersistencePort.getProvider(email);
     }
 
     @Override
-    public User getEmployee(Long id) {
-        return userPersistencePort.getEmployee(id);
+    public User getEmployee(String email) {
+        return userPersistencePort.getEmployee(email);
     }
 
     @Override
-    public User getClient(Long id) {
-        return userPersistencePort.getClient(id);
+    public User getClient(String email) {
+        return userPersistencePort.getClient(email);
     }
 
     @Override
-    public User getOwner(Long id) {
+    public User getOwner(String email) {
 
-        return userPersistencePort.getOwner(id);
+        return userPersistencePort.getOwner(email);
     }
 }

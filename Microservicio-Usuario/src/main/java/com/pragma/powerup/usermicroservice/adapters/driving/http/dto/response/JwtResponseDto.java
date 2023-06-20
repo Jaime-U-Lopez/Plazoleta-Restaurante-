@@ -12,9 +12,9 @@ public class JwtResponseDto {
     private Collection<? extends GrantedAuthority> authorities;
 
 
+
     public JwtResponseDto(String token, String nombreUsuario, Collection<? extends GrantedAuthority> authorities) {
         this.token = token;
-
         this.nombreUsuario = nombreUsuario;
         this.authorities = authorities;
     }

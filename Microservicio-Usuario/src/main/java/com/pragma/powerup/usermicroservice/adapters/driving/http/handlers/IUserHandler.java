@@ -18,10 +18,10 @@ public interface IUserHandler {
 
     void deleteUser(UserRequestDto userRequestDto);
     List<UserResponseDto> getProvider(Integer page);
-    UserResponseDto getProvider(Long id);
-    UserResponseDto getEmployee(Long id);
-    UserResponseDto getClient(Long id);
+    UserResponseDto getProvider(String email);
+    UserResponseDto getEmployee(String email);
+    UserResponseDto getClient(String email);
 
-    UserResponseDto getOwner (Long id);
+    UserResponseDto getOwner (String email);
 
 }

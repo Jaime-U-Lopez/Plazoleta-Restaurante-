@@ -64,22 +64,22 @@ private final IRoleRequestMapper roleRequestMapper;
     }
 
     @Override
-    public UserResponseDto getProvider(Long id) {
-        return personResponseMapper.userToUserResponse(userServicePort.getProvider(id));
+    public UserResponseDto getProvider(String  email) {
+        return personResponseMapper.userToUserResponse(userServicePort.getProvider(email));
     }
 
     @Override
-    public UserResponseDto getEmployee(Long id) {
-        return personResponseMapper.userToUserResponse(userServicePort.getEmployee(id));
+    public UserResponseDto getEmployee(String  email) {
+        return personResponseMapper.userToUserResponse(userServicePort.getEmployee(email));
     }
 
     @Override
-    public UserResponseDto getClient(Long id) {
-        return personResponseMapper.userToUserResponse(userServicePort.getClient(id));
+    public UserResponseDto getClient(String  email) {
+        return personResponseMapper.userToUserResponse(userServicePort.getClient(email));
     }
 
     @Override
-    public UserResponseDto getOwner(Long id) {
-        return personResponseMapper.userToUserResponse(userServicePort.getOwner(id));
+    public UserResponseDto getOwner(String  email) {
+        return personResponseMapper.userToUserResponse(userServicePort.getOwner(email));
     }
 }
