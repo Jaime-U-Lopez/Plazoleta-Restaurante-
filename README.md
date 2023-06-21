@@ -7,6 +7,7 @@ Con este microservicio se proporcionara  para la autenticacion y creación de us
 * Principios Solid
 * Patrones de Diseño cadena de Responsabilidad
  
+Entity : 
 
 ![image](https://github.com/Jaime-U-Lopez/Plazoleta_usuarios/assets/50783391/ee69a0ac-cd6b-4674-99e8-1e2597882158)
 
